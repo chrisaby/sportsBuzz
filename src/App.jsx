@@ -1,14 +1,14 @@
+import { useState } from 'react'
 import Header from './components/Header'
-import FeaturedCard from './components/FeaturedCard'
-import featured from './config/featured.json'
+import BottomNav from './components/BottomNav'
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState('pro')
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen bg-background">
       <Header />
-      <div className="flex flex-col gap-4 mt-4">
-        {featured.map((item) => <FeaturedCard key={item.id} {...item} />)}
-      </div>
+      <div className="h-96" />
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   )
 }
