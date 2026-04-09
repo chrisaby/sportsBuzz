@@ -1,0 +1,22 @@
+[
+  {
+    "id": "steps-daily",
+    "icon": "steps",
+    "badge": "DAILY",
+    "title": "10k Steps",
+    "description": "Push your cardio limits with a daily movement goal.",
+    "current": 8200,
+    "goal": 10000,
+    "unit": "steps"
+  },
+  {
+    "id": "workout-weekly",
+    "icon": "workout",
+    "badge": "WEEKLY",
+    "title": "Daily Workout",
+    "description": "Complete your High-Intensity Interval training streak.",
+    "current": 3,
+    "goal": 5,
+    "unit": "days"
+  }
+]

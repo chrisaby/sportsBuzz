@@ -1,0 +1,16 @@
+[
+  {
+    "id": "dynamic-agility",
+    "tag": "NEW WORKOUT",
+    "title": "Dynamic Agility 2.0",
+    "description": "Improve your change of direction in 15 mins.",
+    "gradient": "from-indigo-900 via-blue-800 to-slate-900"
+  },
+  {
+    "id": "recovery-flows",
+    "tag": "PRO MASTERCLASS",
+    "title": "Recovery Flows",
+    "description": "Professional mobility routines for joint health.",
+    "gradient": "from-teal-900 via-emerald-800 to-slate-900"
+  }
+]
