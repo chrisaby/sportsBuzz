@@ -1,8 +1,11 @@
-export default function FeaturedCard({ tag, title, description, gradient }) {
+// gradient must be a complete Tailwind class string (e.g. "from-indigo-900 via-blue-800 to-slate-900")
+// sourced from featured.json — Tailwind scans that file via the content glob in tailwind.config.js
+export default function FeaturedCard({ tag, title, description, gradient = 'from-surface-high to-surface-low' }) {
   return (
     <div
       className={`relative rounded-xl overflow-hidden bg-gradient-to-br ${gradient}`}
       style={{ aspectRatio: '16/9' }}
+      aria-label={title}
     >
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
 

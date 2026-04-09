@@ -23,6 +23,11 @@ export default function QuestCard({ icon, badge, title, description, current, go
       <p className="font-body text-on-surface-variant text-sm mb-4">{description}</p>
       <div className="w-full h-1.5 bg-surface-highest rounded-full overflow-hidden mb-2">
         <div
+          role="progressbar"
+          aria-valuenow={current}
+          aria-valuemin={0}
+          aria-valuemax={goal}
+          aria-label={`${title} progress`}
           className="h-full bg-primary rounded-full"
           style={{ width: `${progress * 100}%` }}
         />
