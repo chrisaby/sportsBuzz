@@ -57,6 +57,10 @@ export default function ProTab() {
 
       {/* Featured Content */}
       <section className="px-4 pb-4">
+        <p className="text-secondary text-xs font-display font-semibold uppercase tracking-widest mb-1">
+          Featured
+        </p>
+        <h2 className="font-display font-bold text-white text-3xl mb-4">Workouts</h2>
         <div className="flex flex-col gap-4">
           {featured.map((item) => (
             <FeaturedCard key={item.id} {...item} />
