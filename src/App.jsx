@@ -1,11 +1,14 @@
 import Header from './components/Header'
-import StatusRing from './components/StatusRing'
+import QuestCard from './components/QuestCard'
+import quests from './config/quests.json'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background p-4">
       <Header />
-      <StatusRing />
+      <div className="flex flex-col gap-3 mt-4">
+        {quests.map((q) => <QuestCard key={q.id} {...q} />)}
+      </div>
     </div>
   )
 }
