@@ -15,12 +15,12 @@ export default function StatusRing() {
 
       <div className="relative w-52 h-52">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200" aria-hidden="true">
-          {/* Track */}
+          {/* Track — surface-highest (#232a33) */}
           <circle
             cx="100" cy="100" r={RADIUS}
             fill="none" stroke="#232a33" strokeWidth="12"
           />
-          {/* Progress arc */}
+          {/* Progress arc — primary (#95aaff) */}
           <circle
             cx="100" cy="100" r={RADIUS}
             fill="none" stroke="#95aaff" strokeWidth="12"
