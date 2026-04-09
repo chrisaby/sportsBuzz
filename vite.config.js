@@ -15,13 +15,10 @@ export default defineConfig({
         background_color: '#0a0e14',
         display: 'standalone',
         orientation: 'portrait',
+        start_url: '/',
         icons: [
-          {
-            src: 'icons/icon.svg',
-            sizes: 'any',
-            type: 'image/svg+xml',
-            purpose: 'any maskable',
-          },
+          { src: 'icons/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+          { src: 'icons/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'maskable' },
         ],
       },
       workbox: {
