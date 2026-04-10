@@ -69,7 +69,7 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
                 isActive ? 'border-secondary/30' : 'border-white/10'
               }`}
             >
-              {activeWordNum === null && clues.indexOf(w) === visibleIdx ? (
+              {activeWordNum === null && clues[visibleIdx] === w ? (
                 <p className="font-body text-sm text-on-surface-variant">Tap a cell to begin</p>
               ) : (
                 <p className="font-body text-sm text-white/80">

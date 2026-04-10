@@ -21,12 +21,11 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
   const handleTouchEnd = (e) => {
     if (startYRef.current === null) return
     const delta = e.changedTouches[0].clientY - startYRef.current
-    if (sheetRef.current) {
-      sheetRef.current.style.transition = ''
-      sheetRef.current.style.transform = ''
-    }
+    if (sheetRef.current) sheetRef.current.style.transition = ''
     if (delta > 50) {
       onClose()
+    } else if (sheetRef.current) {
+      sheetRef.current.style.transform = ''
     }
     startYRef.current = null
   }
