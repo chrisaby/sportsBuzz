@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
-import { AlignJustify } from 'lucide-react'
+import { AlignJustify, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function ClueCarousel({ words, activeWordNum, direction, onDirectionChange, onClueClick, onViewAll }) {
   const trackRef = useRef(null)
@@ -47,16 +47,49 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
         </span>
       </div>
 
-      {/* Scroll-snap track */}
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        className="flex overflow-x-scroll [&::-webkit-scrollbar]:hidden"
-        style={{
-          scrollSnapType: 'x mandatory',
-          scrollbarWidth: 'none',
-        }}
-      >
+      {/* Scroll-snap track + floating arrows */}
+      <div className="relative">
+        {/* Prev arrow */}
+        {visibleIdx > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              const next = visibleIdx - 1
+              setVisibleIdx(next)
+              trackRef.current?.scrollTo({ left: next * trackRef.current.offsetWidth, behavior: 'smooth' })
+            }}
+            className="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-7 h-7 flex items-center justify-center rounded-full bg-surface-high/90 border border-white/10 text-on-surface-variant shadow-md"
+            aria-label="Previous clue"
+          >
+            <ChevronLeft size={14} />
+          </button>
+        )}
+
+        {/* Next arrow */}
+        {visibleIdx < clues.length - 1 && (
+          <button
+            type="button"
+            onClick={() => {
+              const next = visibleIdx + 1
+              setVisibleIdx(next)
+              trackRef.current?.scrollTo({ left: next * trackRef.current.offsetWidth, behavior: 'smooth' })
+            }}
+            className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-7 h-7 flex items-center justify-center rounded-full bg-surface-high/90 border border-white/10 text-on-surface-variant shadow-md"
+            aria-label="Next clue"
+          >
+            <ChevronRight size={14} />
+          </button>
+        )}
+
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-scroll [&::-webkit-scrollbar]:hidden"
+          style={{
+            scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none',
+          }}
+        >
         {clues.map((w) => {
           const isActive = w.num === activeWordNum
           return (
@@ -65,14 +98,14 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
               type="button"
               onClick={() => onClueClick(w.num, direction)}
               style={{ flex: '0 0 100%', scrollSnapAlign: 'start', textAlign: 'left' }}
-              className={`bg-surface-high/60 border rounded-xl px-4 py-3 transition-colors ${
+              className={`bg-surface-high/60 border rounded-xl px-10 py-4 transition-colors ${
                 isActive ? 'border-secondary/30' : 'border-white/10'
               }`}
             >
               {activeWordNum === null && clues[visibleIdx] === w ? (
-                <p className="font-body text-sm text-on-surface-variant">Tap a cell to begin</p>
+                <p className="font-body text-on-surface-variant">Tap a cell to begin</p>
               ) : (
-                <p className="font-body text-sm text-white/80">
+                <p className="font-body text-white/80">
                   <span className="font-display font-bold text-secondary mr-1.5">
                     {w.num}{direction === 'across' ? 'A' : 'D'}
                   </span>
@@ -83,6 +116,7 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
             </button>
           )
         })}
+        </div>
       </div>
 
       {/* View All button */}

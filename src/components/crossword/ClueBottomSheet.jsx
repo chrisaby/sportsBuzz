@@ -1,9 +1,15 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { X } from 'lucide-react'
 
 export default function ClueBottomSheet({ open, words, activeWordNum, direction, onClueClick, onClose }) {
   const sheetRef = useRef(null)
   const startYRef = useRef(null)
+
+  // Lock body scroll while sheet is open so the page doesn't scroll behind it
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
   const handleTouchStart = (e) => {
     startYRef.current = e.touches[0].clientY
@@ -56,6 +62,7 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
           right: 0,
           zIndex: 50,
           maxHeight: '70vh',
+          paddingBottom: 'env(safe-area-inset-bottom)',
           transform: open ? 'translateY(0)' : 'translateY(100%)',
           transition: 'transform 0.3s ease',
           display: 'flex',
@@ -68,6 +75,7 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          style={{ touchAction: 'none' }}
         >
           {/* Drag handle */}
           <div className="flex flex-col items-center pt-3 pb-2 cursor-grab">
@@ -90,7 +98,10 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
         </div>
 
         {/* Scrollable clue list */}
-        <div className="overflow-y-auto flex-1 px-4 py-3 space-y-4 min-h-0">
+        <div
+          className="overflow-y-auto flex-1 px-4 pt-3 pb-24 space-y-4"
+          style={{ overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}
+        >
           {['across', 'down'].map((dir) => (
             <div key={dir}>
               <h4 className="font-display font-bold text-on-surface-variant text-xs uppercase tracking-widest mb-2 pb-1 border-b border-white/5">
