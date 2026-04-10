@@ -46,6 +46,7 @@ function saveProgress(puzzleId, data) {
   }
 }
 
+const SENTINEL = '\u200B'
 const CELL = 38
 const BORDER = 2
 
@@ -77,12 +78,7 @@ export default function CrosswordGame({ puzzle, onBack }) {
   const [completed, setCompleted] = useState(false)
   const [flash, setFlash] = useState(false)
   const [showAllClues, setShowAllClues] = useState(false)
-  const gridRef = useRef(null)
   const inputRef = useRef(null)
-
-  // Zero-width space sentinel lets us detect backspace on Android
-  // (when input is empty after a change, backspace was pressed)
-  const SENTINEL = '\u200B'
 
   const activeWordNum = selected
     ? cellWordMap[`${selected.row},${selected.col}`]?.[direction]
@@ -399,7 +395,6 @@ export default function CrosswordGame({ puzzle, onBack }) {
       <div className="flex flex-col items-center px-4">
         <div className="bg-surface-high/40 rounded-xl p-3 border border-white/10 shadow-xl">
           <div
-            ref={gridRef}
             tabIndex={0}
             onKeyDown={handleKeyDown}
             className="outline-none"
