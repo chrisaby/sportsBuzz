@@ -7,6 +7,7 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
 
   const handleTouchStart = (e) => {
     startYRef.current = e.touches[0].clientY
+    if (sheetRef.current) sheetRef.current.style.transition = 'none'
   }
 
   const handleTouchMove = (e) => {
@@ -20,10 +21,12 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
   const handleTouchEnd = (e) => {
     if (startYRef.current === null) return
     const delta = e.changedTouches[0].clientY - startYRef.current
+    if (sheetRef.current) {
+      sheetRef.current.style.transition = ''
+      sheetRef.current.style.transform = ''
+    }
     if (delta > 50) {
       onClose()
-    } else if (sheetRef.current) {
-      sheetRef.current.style.transform = ''
     }
     startYRef.current = null
   }
@@ -61,28 +64,30 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
         }}
         className="bg-surface-high rounded-t-2xl border-t border-white/10"
       >
-        {/* Drag handle area */}
+        {/* Drag region: handle + header */}
         <div
-          className="flex flex-col items-center pt-3 pb-2 cursor-grab"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <div className="w-8 h-1 bg-white/20 rounded-full" />
-        </div>
+          {/* Drag handle */}
+          <div className="flex flex-col items-center pt-3 pb-2 cursor-grab">
+            <div className="w-8 h-1 bg-white/20 rounded-full" />
+          </div>
 
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 pb-3 border-b border-white/10">
-          <h3 className="font-display font-bold text-white text-sm uppercase tracking-widest">
-            All Clues
-          </h3>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-white transition-colors"
-            aria-label="Close"
-          >
-            <X size={16} />
-          </button>
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 pb-3 border-b border-white/10">
+            <h3 className="font-display font-bold text-white text-sm uppercase tracking-widest">
+              All Clues
+            </h3>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-white transition-colors"
+              aria-label="Close"
+            >
+              <X size={16} />
+            </button>
+          </div>
         </div>
 
         {/* Scrollable clue list */}
