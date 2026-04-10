@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
+import { AlignJustify } from 'lucide-react'
 
 export default function ClueCarousel({ words, activeWordNum, direction, onDirectionChange, onClueClick, onViewAll }) {
   const trackRef = useRef(null)
@@ -7,6 +8,7 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
 
   // Auto-scroll to match active word when grid selection changes
   useEffect(() => {
+    setVisibleIdx(0)
     const idx = clues.findIndex((w) => w.num === activeWordNum)
     if (idx >= 0 && trackRef.current) {
       setVisibleIdx(idx)
@@ -53,21 +55,21 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
         style={{
           scrollSnapType: 'x mandatory',
           scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
         }}
       >
         {clues.map((w) => {
           const isActive = w.num === activeWordNum
           return (
-            <div
+            <button
               key={w.num}
+              type="button"
               onClick={() => onClueClick(w.num, direction)}
-              style={{ flex: '0 0 100%', scrollSnapAlign: 'start' }}
-              className={`bg-surface-high/60 border rounded-xl px-4 py-3 cursor-pointer transition-colors ${
+              style={{ flex: '0 0 100%', scrollSnapAlign: 'start', textAlign: 'left' }}
+              className={`bg-surface-high/60 border rounded-xl px-4 py-3 transition-colors ${
                 isActive ? 'border-secondary/30' : 'border-white/10'
               }`}
             >
-              {activeWordNum === null && w === clues[visibleIdx] ? (
+              {activeWordNum === null && clues.indexOf(w) === visibleIdx ? (
                 <p className="font-body text-sm text-on-surface-variant">Tap a cell to begin</p>
               ) : (
                 <p className="font-body text-sm text-white/80">
@@ -78,7 +80,7 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
                   <span className="text-on-surface-variant ml-1">({w.len})</span>
                 </p>
               )}
-            </div>
+            </button>
           )
         })}
       </div>
@@ -88,7 +90,7 @@ export default function ClueCarousel({ words, activeWordNum, direction, onDirect
         onClick={onViewAll}
         className="w-full mt-2 py-2 text-xs font-display font-bold uppercase tracking-wide text-on-surface-variant border border-white/10 rounded-xl hover:border-white/20 transition-colors"
       >
-        &#9776; View All Clues
+        <AlignJustify size={12} className="inline mr-1.5" />View All Clues
       </button>
     </div>
   )
