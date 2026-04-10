@@ -3,9 +3,11 @@ import Header from './components/Header'
 import BottomNav from './components/BottomNav'
 import ProTab from './tabs/ProTab'
 import EmptyTab from './tabs/EmptyTab'
+import GamesTab from './tabs/GamesTab'
 
 function renderTab(activeTab) {
   if (activeTab === 'pro') return <ProTab />
+  if (activeTab === 'games') return <GamesTab />
   const name = activeTab.charAt(0).toUpperCase() + activeTab.slice(1)
   return <EmptyTab name={name} />
 }
