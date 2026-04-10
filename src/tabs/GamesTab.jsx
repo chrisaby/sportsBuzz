@@ -1,9 +1,8 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import PuzzleSelectionScreen from '../components/crossword/PuzzleSelectionScreen'
 import CrosswordGame from '../components/crossword/CrosswordGame'
 import puzzles from '../config/crosswords.json'
-
-const STORAGE_PREFIX = 'cw_progress_'
+import { STORAGE_PREFIX } from '../config/crosswordStorage'
 
 function loadAllProgress() {
   const map = {}
@@ -19,10 +18,7 @@ function loadAllProgress() {
 export default function GamesTab() {
   const [view, setView] = useState('selection') // 'selection' | 'game'
   const [selectedPuzzle, setSelectedPuzzle] = useState(null)
-  const [refreshKey, setRefreshKey] = useState(0)
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const progressMap = useMemo(() => loadAllProgress(), [refreshKey])
+  const [progressMap, setProgressMap] = useState(() => loadAllProgress())
 
   const handleSelect = useCallback((puzzle) => {
     setSelectedPuzzle(puzzle)
@@ -32,7 +28,7 @@ export default function GamesTab() {
   const handleBack = useCallback(() => {
     setSelectedPuzzle(null)
     setView('selection')
-    setRefreshKey((k) => k + 1) // refresh progress on return
+    setProgressMap(loadAllProgress()) // refresh progress on return
   }, [])
 
   if (view === 'game' && selectedPuzzle) {

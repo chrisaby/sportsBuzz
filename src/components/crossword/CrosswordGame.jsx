@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { ArrowLeft, Check, Eye, RotateCcw } from 'lucide-react'
-
-const STORAGE_PREFIX = 'cw_progress_'
+import { STORAGE_PREFIX } from '../../config/crosswordStorage'
 
 function buildCellWordMap(words, rows, cols) {
   const map = {}
