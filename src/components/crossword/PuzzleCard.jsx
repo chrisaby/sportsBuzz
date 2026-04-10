@@ -22,8 +22,8 @@ export default function PuzzleCard({ puzzle, progress, onSelect }) {
           if (grid?.[r]?.[c]) filledCells++
         }
   }
-  const pct = totalCells > 0 ? Math.round((filledCells / totalCells) * 100) : 0
   const isCompleted = progress?.completed === true
+  const pct = isCompleted ? 100 : totalCells > 0 ? Math.round((filledCells / totalCells) * 100) : 0
   const isStarted = filledCells > 0
 
   const label = isCompleted ? 'Play Again' : isStarted ? 'Resume' : 'Start'
@@ -48,7 +48,7 @@ export default function PuzzleCard({ puzzle, progress, onSelect }) {
             <Clock size={12} />
           )}
           <span className="font-body text-xs">
-            {isCompleted ? 'Done' : `${estimatedMinutes} min`}
+            {isCompleted ? 'Done' : `${estimatedMinutes ?? '?'} min`}
           </span>
         </div>
       </div>
