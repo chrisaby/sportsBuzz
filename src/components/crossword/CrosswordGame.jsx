@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
-import PropTypes from 'prop-types'
 import { ArrowLeft, Check, Eye, RotateCcw } from 'lucide-react'
 
 const STORAGE_PREFIX = 'cw_progress_'
@@ -512,29 +511,4 @@ export default function CrosswordGame({ puzzle, onBack }) {
       </div>
     </div>
   )
-}
-
-const wordShape = PropTypes.shape({
-  num: PropTypes.number.isRequired,
-  row: PropTypes.number.isRequired,
-  col: PropTypes.number.isRequired,
-  len: PropTypes.number.isRequired,
-  clue: PropTypes.string.isRequired,
-})
-
-CrosswordGame.propTypes = {
-  puzzle: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    difficulty: PropTypes.oneOf(['easy', 'medium', 'hard']).isRequired,
-    rows: PropTypes.number.isRequired,
-    cols: PropTypes.number.isRequired,
-    solution: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-    cellNumbers: PropTypes.objectOf(PropTypes.number).isRequired,
-    words: PropTypes.shape({
-      across: PropTypes.arrayOf(wordShape).isRequired,
-      down: PropTypes.arrayOf(wordShape).isRequired,
-    }).isRequired,
-  }).isRequired,
-  onBack: PropTypes.func.isRequired,
 }
