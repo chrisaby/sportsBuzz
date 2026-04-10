@@ -1,9 +1,22 @@
-import { Grid3X3 } from 'lucide-react'
+import { ArrowLeft, Grid3X3 } from 'lucide-react'
 import PuzzleCard from './PuzzleCard'
 
-export default function PuzzleSelectionScreen({ puzzles, progressMap, onSelect }) {
+export default function PuzzleSelectionScreen({ puzzles, progressMap, onSelect, onBack }) {
   return (
     <div className="pb-24">
+      {/* Back button */}
+      {onBack && (
+        <div className="px-4 pt-3 pb-1">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-on-surface-variant hover:text-white transition-colors"
+          >
+            <ArrowLeft size={16} />
+            <span className="font-body text-sm">Games</span>
+          </button>
+        </div>
+      )}
+
       {/* Hero */}
       <section className="px-4 pt-2 pb-4">
         <p className="text-secondary text-xs font-display font-semibold uppercase tracking-widest mb-1">
