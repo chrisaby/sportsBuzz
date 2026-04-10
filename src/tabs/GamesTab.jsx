@@ -21,6 +21,7 @@ export default function GamesTab() {
   const [selectedPuzzle, setSelectedPuzzle] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const progressMap = useMemo(() => loadAllProgress(), [refreshKey])
 
   const handleSelect = useCallback((puzzle) => {
