@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { ArrowLeft, Check, Eye, RotateCcw } from 'lucide-react'
 import { STORAGE_PREFIX } from '../../config/crosswordStorage'
+import ClueCarousel from './ClueCarousel'
+import ClueBottomSheet from './ClueBottomSheet'
 
 function buildCellWordMap(words, rows, cols) {
   const map = {}
@@ -74,7 +76,13 @@ export default function CrosswordGame({ puzzle, onBack }) {
   const [revealed, setRevealed] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [flash, setFlash] = useState(false)
+  const [showAllClues, setShowAllClues] = useState(false)
   const gridRef = useRef(null)
+  const inputRef = useRef(null)
+
+  // Zero-width space sentinel lets us detect backspace on Android
+  // (when input is empty after a change, backspace was pressed)
+  const SENTINEL = '\u200B'
 
   const activeWordNum = selected
     ? cellWordMap[`${selected.row},${selected.col}`]?.[direction]
@@ -162,7 +170,7 @@ export default function CrosswordGame({ puzzle, onBack }) {
       }
     }
     setChecked(false)
-    gridRef.current?.focus()
+    inputRef.current?.focus()
   }
 
   const handleClueClick = (num, dir) => {
@@ -171,7 +179,7 @@ export default function CrosswordGame({ puzzle, onBack }) {
     if (word) {
       setSelected({ row: word.row, col: word.col })
       setDirection(dir)
-      gridRef.current?.focus()
+      inputRef.current?.focus()
     }
   }
 
@@ -252,6 +260,55 @@ export default function CrosswordGame({ puzzle, onBack }) {
     [selected, direction, userGrid, activeWordNum, revealed, words, rows, cols, solution, advance, retreat]
   )
 
+  // Handles mobile input (Android fires onChange instead of onKeyDown with real key)
+  const handleMobileInput = useCallback(
+    (e) => {
+      const val = e.target.value
+      if (!selected || revealed) {
+        e.target.value = SENTINEL
+        return
+      }
+      const { row, col } = selected
+      const cleaned = val.replace(SENTINEL, '')
+      if (cleaned.length === 0) {
+        // Backspace pressed
+        if (userGrid[row][col]) {
+          setUserGrid((prev) => {
+            const next = prev.map((r) => [...r])
+            next[row][col] = ''
+            return next
+          })
+        } else {
+          const prev = retreat(row, col, direction)
+          if (prev) {
+            setSelected(prev)
+            setUserGrid((g) => {
+              const next = g.map((r) => [...r])
+              next[prev.row][prev.col] = ''
+              return next
+            })
+          }
+        }
+        setChecked(false)
+      } else {
+        const char = cleaned.slice(-1)
+        if (char.match(/[a-zA-Z]/)) {
+          const letter = char.toUpperCase()
+          setUserGrid((prev) => {
+            const next = prev.map((r) => [...r])
+            next[row][col] = letter
+            return next
+          })
+          const nxt = advance(row, col, direction)
+          if (nxt) setSelected(nxt)
+          setChecked(false)
+        }
+      }
+      e.target.value = SENTINEL
+    },
+    [selected, direction, revealed, userGrid, advance, retreat]
+  )
+
   const handleReveal = () => {
     setRevealed(true)
     setUserGrid(solution.map((row) => row.map((cell) => cell || '')))
@@ -275,14 +332,32 @@ export default function CrosswordGame({ puzzle, onBack }) {
     saveProgress(id, { userGrid: Array.from({ length: rows }, () => Array(cols).fill('')), completed: false, startedAt: null, completedAt: null })
   }
 
-  const activeWordObj = activeWordNum
-    ? (direction === 'across' ? words.across : words.down).find(
-        (w) => w.num === activeWordNum
-      )
-    : null
-
   return (
     <div className="pb-24">
+      {/* Hidden input — receives focus on cell tap to trigger mobile keyboard */}
+      <input
+        ref={inputRef}
+        type="text"
+        inputMode="text"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="characters"
+        spellCheck={false}
+        defaultValue={SENTINEL}
+        onFocus={(e) => { e.target.value = SENTINEL }}
+        onKeyDown={handleKeyDown}
+        onChange={handleMobileInput}
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          top: -300,
+          left: -300,
+          width: 1,
+          height: 1,
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      />
       {/* Header */}
       <div className="flex items-center gap-3 px-4 pt-3 pb-2">
         <button
@@ -411,26 +486,6 @@ export default function CrosswordGame({ puzzle, onBack }) {
           </div>
         </div>
 
-        {/* Active clue bar */}
-        <div className="bg-surface-high/60 border border-white/10 rounded-xl px-4 py-2.5 mt-3 text-center w-full max-w-sm">
-          {activeWordObj ? (
-            <p className="font-body text-sm text-white/80">
-              <span className="font-display font-bold text-secondary mr-1.5">
-                {activeWordObj.num}
-                {direction === 'across' ? 'A' : 'D'}
-              </span>
-              {activeWordObj.clue}
-              <span className="text-on-surface-variant ml-1">
-                ({activeWordObj.len})
-              </span>
-            </p>
-          ) : (
-            <p className="font-body text-sm text-on-surface-variant">
-              Tap a cell to begin
-            </p>
-          )}
-        </div>
-
         {/* Buttons */}
         <div className="flex gap-2.5 mt-3">
           <button
@@ -466,53 +521,23 @@ export default function CrosswordGame({ puzzle, onBack }) {
         )}
       </div>
 
-      {/* Clues */}
-      <div className="px-4 mt-5 space-y-4">
-        {['across', 'down'].map((dir) => (
-          <div
-            key={dir}
-            className="bg-surface-high/40 border border-white/10 rounded-xl p-3"
-          >
-            <h3 className="font-display font-bold text-on-surface-variant text-xs uppercase tracking-widest mb-3 pb-2 border-b border-white/5">
-              {dir === 'across' ? '\u2192 Across' : '\u2193 Down'}
-            </h3>
-            <div className="space-y-1">
-              {words[dir].map((w) => {
-                const isActive = direction === dir && activeWordNum === w.num
-                return (
-                  <button
-                    key={`${dir}-${w.num}`}
-                    className={`w-full flex items-start gap-2 px-2 py-1.5 rounded-lg text-left transition-colors ${
-                      isActive
-                        ? 'bg-secondary/10 border border-secondary/30'
-                        : 'border border-transparent hover:bg-white/5'
-                    }`}
-                    onClick={() => handleClueClick(w.num, dir)}
-                  >
-                    <span
-                      className={`font-display text-xs font-bold min-w-[20px] pt-0.5 ${
-                        isActive ? 'text-secondary' : 'text-on-surface-variant/50'
-                      }`}
-                    >
-                      {w.num}.
-                    </span>
-                    <span
-                      className={`font-body text-sm leading-snug ${
-                        isActive ? 'text-secondary/90' : 'text-on-surface-variant'
-                      }`}
-                    >
-                      {w.clue}
-                      <span className="text-on-surface-variant/40 ml-1">
-                        ({w.len})
-                      </span>
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
+      <ClueCarousel
+        words={words}
+        activeWordNum={activeWordNum}
+        direction={direction}
+        onDirectionChange={setDirection}
+        onClueClick={handleClueClick}
+        onViewAll={() => setShowAllClues(true)}
+      />
+
+      <ClueBottomSheet
+        open={showAllClues}
+        words={words}
+        activeWordNum={activeWordNum}
+        direction={direction}
+        onClueClick={handleClueClick}
+        onClose={() => setShowAllClues(false)}
+      />
     </div>
   )
 }
