@@ -1,0 +1,122 @@
+[
+  {
+    "id": "sports-mix-easy",
+    "title": "Sports Mix",
+    "difficulty": "easy",
+    "estimatedMinutes": 8,
+    "description": "Classic cricket and football terms for beginners.",
+    "rows": 11,
+    "cols": 9,
+    "solution": [
+      [null,"C","O","R","N","E","R",null,null],
+      ["P","E","N","A","L","T","Y",null,null],
+      [null,"N",null,null,null,"G","O","A","L"],
+      ["S","T","R","I","K","E","R","H",null],
+      ["T","U",null,"W","I","C","K","E","T"],
+      ["U","R",null,null,null,null,"E","A",null],
+      ["M","Y",null,null,null,null,"R","D",null],
+      ["P",null,null,null,"F",null,null,"E",null],
+      ["S",null,null,null,"O","V","E","R",null],
+      [null,null,null,null,"U",null,null,null,null],
+      [null,null,null,null,"L",null,null,null,null]
+    ],
+    "cellNumbers": {
+      "0,1": 1, "1,0": 2, "1,6": 3, "2,5": 4,
+      "3,0": 5, "3,7": 6, "4,3": 7, "7,4": 8, "8,4": 9
+    },
+    "words": {
+      "across": [
+        { "num": 1, "row": 0, "col": 1, "len": 6, "answer": "CORNER", "clue": "Set piece taken from the corner flag in football" },
+        { "num": 2, "row": 1, "col": 0, "len": 7, "answer": "PENALTY", "clue": "Spot kick awarded for a foul inside the box" },
+        { "num": 4, "row": 2, "col": 5, "len": 4, "answer": "GOAL", "clue": "What a striker aims to score" },
+        { "num": 5, "row": 3, "col": 0, "len": 7, "answer": "STRIKER", "clue": "Forward player whose main job is to score goals" },
+        { "num": 7, "row": 4, "col": 3, "len": 6, "answer": "WICKET", "clue": "Three stumps and two bails a batsman defends" },
+        { "num": 9, "row": 8, "col": 4, "len": 4, "answer": "OVER", "clue": "Six deliveries bowled by one bowler in cricket" }
+      ],
+      "down": [
+        { "num": 1, "row": 0, "col": 1, "len": 7, "answer": "CENTURY", "clue": "A batsman's score of 100 runs" },
+        { "num": 3, "row": 1, "col": 6, "len": 6, "answer": "YORKER", "clue": "Delivery aimed at or near the batsman's feet" },
+        { "num": 5, "row": 3, "col": 0, "len": 6, "answer": "STUMPS", "clue": "Three upright posts at each end of the pitch" },
+        { "num": 6, "row": 3, "col": 7, "len": 6, "answer": "HEADER", "clue": "Scoring or clearing the ball with your head" },
+        { "num": 8, "row": 7, "col": 4, "len": 4, "answer": "FOUL", "clue": "An illegal play or infringement of rules" }
+      ]
+    }
+  },
+  {
+    "id": "court-kings-medium",
+    "title": "Court Kings",
+    "difficulty": "medium",
+    "estimatedMinutes": 12,
+    "description": "Basketball and tennis terms for sports fans.",
+    "rows": 7,
+    "cols": 8,
+    "solution": [
+      ["A","C","E","B",null,null,null,null],
+      [null,null,"M","A","T","C","H",null],
+      ["S","M","A","S","H",null,null,null],
+      ["D","U","N","K",null,null,null,null],
+      [null,null,"S","E","R","V","E",null],
+      [null,"N","E","T",null,null,null,null],
+      [null,null,"T",null,null,null,null,null]
+    ],
+    "cellNumbers": {
+      "0,0": 1, "0,3": 2, "1,2": 3, "2,0": 4,
+      "3,0": 5, "4,2": 6, "5,1": 7
+    },
+    "words": {
+      "across": [
+        { "num": 1, "row": 0, "col": 0, "len": 3, "answer": "ACE", "clue": "A serve the opponent cannot return" },
+        { "num": 3, "row": 1, "col": 2, "len": 5, "answer": "MATCH", "clue": "A competitive game between two sides" },
+        { "num": 4, "row": 2, "col": 0, "len": 5, "answer": "SMASH", "clue": "Powerful overhead shot in tennis or badminton" },
+        { "num": 5, "row": 3, "col": 0, "len": 4, "answer": "DUNK", "clue": "Slam the ball through the hoop from above" },
+        { "num": 6, "row": 4, "col": 2, "len": 5, "answer": "SERVE", "clue": "Shot that starts each point in tennis" },
+        { "num": 7, "row": 5, "col": 1, "len": 3, "answer": "NET", "clue": "Divider stretched across the center of the court" }
+      ],
+      "down": [
+        { "num": 2, "row": 0, "col": 3, "len": 6, "answer": "BASKET", "clue": "The hoop and backboard target in basketball" },
+        { "num": 6, "row": 4, "col": 2, "len": 3, "answer": "SET", "clue": "One section of a tennis match, first to six games" }
+      ]
+    }
+  },
+  {
+    "id": "legends-arena-hard",
+    "title": "Legends Arena",
+    "difficulty": "hard",
+    "estimatedMinutes": 20,
+    "description": "Multi-sport challenge for true sports enthusiasts.",
+    "rows": 8,
+    "cols": 10,
+    "solution": [
+      ["T","A","C","K","L","E",null,null,null,null],
+      ["R",null,null,null,"R","E","C","O","R","D"],
+      ["A","S","S","I","S","T",null,null,null,"A"],
+      ["C",null,null,null,"P","R","E","L","A","Y"],
+      ["K","I","C","K","R",null,null,null,"R",null],
+      [null,"S","T","R","I","D","E",null,"E",null],
+      [null,null,null,null,"N","M","E","D","A","L"],
+      ["P","O","I","N","T",null,null,null,null,null]
+    ],
+    "cellNumbers": {
+      "0,0": 1, "1,4": 2, "1,9": 3, "2,0": 4, "2,4": 5,
+      "3,5": 6, "3,8": 7, "4,0": 8, "5,1": 9, "6,5": 10, "7,0": 11
+    },
+    "words": {
+      "across": [
+        { "num": 1, "row": 0, "col": 0, "len": 6, "answer": "TACKLE", "clue": "Defensive play to dispossess an opponent of the ball" },
+        { "num": 2, "row": 1, "col": 4, "len": 6, "answer": "RECORD", "clue": "A best-ever mark set in an athletic event" },
+        { "num": 4, "row": 2, "col": 0, "len": 6, "answer": "ASSIST", "clue": "The pass that directly leads to a goal being scored" },
+        { "num": 6, "row": 3, "col": 5, "len": 5, "answer": "RELAY", "clue": "A team race where runners take turns on legs" },
+        { "num": 8, "row": 4, "col": 0, "len": 4, "answer": "KICK", "clue": "How a goal is scored from the penalty spot" },
+        { "num": 9, "row": 5, "col": 1, "len": 6, "answer": "STRIDE", "clue": "A runner's long rhythmic step during a race" },
+        { "num": 10, "row": 6, "col": 5, "len": 5, "answer": "MEDAL", "clue": "Gold, silver, or bronze award at the Olympics" },
+        { "num": 11, "row": 7, "col": 0, "len": 5, "answer": "POINT", "clue": "Single unit of scoring in most sports" }
+      ],
+      "down": [
+        { "num": 1, "row": 0, "col": 0, "len": 5, "answer": "TRACK", "clue": "The oval course where sprinters compete" },
+        { "num": 5, "row": 2, "col": 4, "len": 6, "answer": "SPRINT", "clue": "A short fast race like the 100 meters" },
+        { "num": 7, "row": 3, "col": 8, "len": 4, "answer": "AREA", "clue": "The penalty ___ where fouls give away spot kicks" },
+        { "num": 3, "row": 1, "col": 9, "len": 3, "answer": "DAY", "clue": "Match ___, when the big game finally arrives" }
+      ]
+    }
+  }
+]
