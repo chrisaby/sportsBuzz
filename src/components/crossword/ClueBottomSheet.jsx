@@ -90,7 +90,7 @@ export default function ClueBottomSheet({ open, words, activeWordNum, direction,
         </div>
 
         {/* Scrollable clue list */}
-        <div className="overflow-y-auto flex-1 px-4 py-3 space-y-4">
+        <div className="overflow-y-auto flex-1 px-4 py-3 space-y-4 min-h-0">
           {['across', 'down'].map((dir) => (
             <div key={dir}>
               <h4 className="font-display font-bold text-on-surface-variant text-xs uppercase tracking-widest mb-2 pb-1 border-b border-white/5">
