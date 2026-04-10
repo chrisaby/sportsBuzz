@@ -38,7 +38,20 @@ function loadProgress(puzzleId) {
 }
 
 function saveProgress(puzzleId, data) {
-  localStorage.setItem(STORAGE_PREFIX + puzzleId, JSON.stringify(data))
+  try {
+    localStorage.setItem(STORAGE_PREFIX + puzzleId, JSON.stringify(data))
+  } catch {
+    // Storage quota exceeded or unavailable
+  }
+}
+
+const CELL = 38
+const BORDER = 2
+
+const DIFF_BADGE_COLOR = {
+  easy: 'bg-secondary text-background',
+  medium: 'bg-amber-500 text-background',
+  hard: 'bg-red-500/20 text-red-300 border border-red-500/40',
 }
 
 export default function CrosswordGame({ puzzle, onBack }) {
@@ -98,9 +111,10 @@ export default function CrosswordGame({ puzzle, onBack }) {
     if (ok && any && !revealed) {
       setCompleted(true)
       setFlash(true)
-      setTimeout(() => setFlash(false), 2000)
+      const timer = setTimeout(() => setFlash(false), 2000)
       const saved = loadProgress(id) || {}
       saveProgress(id, { ...saved, userGrid, completed: true, completedAt: new Date().toISOString() })
+      return () => clearTimeout(timer)
     } else {
       setCompleted(false)
     }
@@ -262,20 +276,11 @@ export default function CrosswordGame({ puzzle, onBack }) {
     saveProgress(id, { userGrid: Array.from({ length: rows }, () => Array(cols).fill('')), completed: false, startedAt: null, completedAt: null })
   }
 
-  const CELL = 38
-  const BORDER = 2
-
   const activeWordObj = activeWordNum
     ? (direction === 'across' ? words.across : words.down).find(
         (w) => w.num === activeWordNum
       )
     : null
-
-  const diffBadgeColor = {
-    easy: 'bg-secondary text-background',
-    medium: 'bg-amber-500 text-background',
-    hard: 'bg-red-500/20 text-red-300 border border-red-500/40',
-  }
 
   return (
     <div className="pb-24">
@@ -293,7 +298,7 @@ export default function CrosswordGame({ puzzle, onBack }) {
             {title}
           </h2>
           <span
-            className={`inline-block text-[10px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-md mt-0.5 ${diffBadgeColor[difficulty]}`}
+            className={`inline-block text-[10px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-md mt-0.5 ${DIFF_BADGE_COLOR[difficulty]}`}
           >
             {difficulty}
           </span>
