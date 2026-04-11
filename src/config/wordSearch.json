@@ -1,0 +1,82 @@
+[
+  {
+    "id": "nba-stars",
+    "categoryLabel": "HARDWOOD HEROES",
+    "title": "NBA Stars",
+    "sport": "basketball",
+    "timeSeconds": 180,
+    "grid": [
+      ["S","P","R","I","N","T","X","K","W","A"],
+      ["O","B","A","L","L","G","V","S","E","R"],
+      ["T","H","C","Y","M","P","O","C","R","B"],
+      ["E","U","D","W","L","A","Z","O","I","K"],
+      ["D","R","I","B","B","L","E","R","P","J"],
+      ["F","V","X","G","Q","H","K","E","M","Y"],
+      ["P","I","T","C","H","G","N","Y","L","A"],
+      ["A","T","H","L","E","T","E","U","V","I"],
+      ["C","O","U","T","E","N","N","I","S","P"],
+      ["S","Q","U","A","D","F","L","O","A","G"]
+    ],
+    "words": ["SPRINT","TENNIS","SCORE","ATHLETE","DRIBBLE","PITCH"]
+  },
+  {
+    "id": "soccer-legends",
+    "categoryLabel": "THE BEAUTIFUL GAME",
+    "title": "Soccer Legends",
+    "sport": "soccer",
+    "timeSeconds": 180,
+    "grid": [
+      ["G","O","A","L","X","K","I","C","K","S"],
+      ["P","E","N","A","L","T","Y","M","O","V"],
+      ["D","R","I","B","B","L","E","F","U","W"],
+      ["S","T","R","I","K","E","R","Z","A","I"],
+      ["O","F","F","S","I","D","E","Q","X","N"],
+      ["C","L","E","A","T","S","K","J","P","G"],
+      ["C","O","R","N","E","R","V","Y","N","E"],
+      ["R","E","F","E","R","E","E","U","T","R"],
+      ["H","A","T","T","R","I","C","K","L","B"],
+      ["F","O","U","L","X","M","A","R","K","S"]
+    ],
+    "words": ["GOAL","PENALTY","DRIBBLE","STRIKER","OFFSIDE","HATTRICK","CORNER","REFEREE"]
+  },
+  {
+    "id": "tennis-greats",
+    "categoryLabel": "LOVE ALL",
+    "title": "Tennis Greats",
+    "sport": "tennis",
+    "timeSeconds": 150,
+    "grid": [
+      ["A","C","E","X","S","E","R","V","E","K"],
+      ["V","O","L","L","E","Y","Q","M","P","D"],
+      ["D","E","U","C","E","Z","B","A","S","E"],
+      ["S","M","A","S","H","W","R","T","I","L"],
+      ["F","A","U","L","T","K","E","C","H","I"],
+      ["L","O","B","X","Y","N","A","H","F","N"],
+      ["S","L","I","C","E","P","K","U","O","E"],
+      ["G","R","I","P","D","E","U","V","R","M"],
+      ["T","O","S","S","X","W","Q","I","E","A"],
+      ["N","E","T","J","S","P","I","N","A","N"]
+    ],
+    "words": ["ACE","SERVE","VOLLEY","DEUCE","SMASH","FAULT","LOB","SLICE","SPIN","NET"]
+  },
+  {
+    "id": "track-field",
+    "categoryLabel": "FASTER HIGHER STRONGER",
+    "title": "Track & Field",
+    "sport": "athletics",
+    "timeSeconds": 150,
+    "grid": [
+      ["S","P","R","I","N","T","X","K","W","A"],
+      ["H","U","R","D","L","E","V","S","E","R"],
+      ["J","A","V","E","L","I","N","C","P","B"],
+      ["R","E","L","A","Y","Z","O","O","I","K"],
+      ["D","I","S","C","U","S","E","R","J","Y"],
+      ["V","A","U","L","T","H","K","E","M","A"],
+      ["L","O","N","G","J","U","M","P","L","I"],
+      ["S","H","O","T","P","U","T","U","V","N"],
+      ["M","A","R","A","T","H","O","N","S","G"],
+      ["S","T","E","E","P","L","E","F","O","G"]
+    ],
+    "words": ["SPRINT","HURDLE","JAVELIN","RELAY","DISCUS","VAULT","LONGJUMP","SHOTPUT","MARATHON"]
+  }
+]
