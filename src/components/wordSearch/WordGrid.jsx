@@ -1,5 +1,4 @@
 // src/components/wordSearch/WordGrid.jsx
-import { useRef, useCallback } from 'react'
 
 // Returns array of {row, col} from start in direction for word.length steps
 function buildCells(startRow, startCol, dx, dy, length) {
@@ -41,19 +40,8 @@ function cellKey(row, col) {
 }
 
 export default function WordGrid({ grid, foundCells, selectionCells, missedCells }) {
-  const gridRef = useRef(null)
-
-  const getCellFromPoint = useCallback((x, y) => {
-    if (!gridRef.current) return null
-    const el = document.elementFromPoint(x, y)
-    const cell = el?.closest('[data-cell]')
-    if (!cell) return null
-    return { row: parseInt(cell.dataset.row), col: parseInt(cell.dataset.col) }
-  }, [])
-
   return (
     <div
-      ref={gridRef}
       className="px-4 mb-4 select-none"
       style={{ touchAction: 'none' }}
     >
@@ -93,5 +81,4 @@ export default function WordGrid({ grid, foundCells, selectionCells, missedCells
   )
 }
 
-WordGrid.getCellFromPoint = null // set externally if needed
 export { buildCells, cellKey }
