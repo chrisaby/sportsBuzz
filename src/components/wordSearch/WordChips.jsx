@@ -18,12 +18,12 @@ export default function WordChips({ words, foundWords }) {
               key={word}
               className={`px-3 py-1 rounded-full text-xs font-display font-bold uppercase tracking-wide border transition-all ${
                 found
-                  ? 'border-secondary text-secondary line-through opacity-60'
+                  ? 'border-secondary text-secondary opacity-60'
                   : 'border-white/20 text-white'
               }`}
             >
               {found && <span className="mr-1">✓</span>}
-              {word}
+              <span className={found ? 'line-through' : ''}>{word}</span>
             </span>
           )
         })}
