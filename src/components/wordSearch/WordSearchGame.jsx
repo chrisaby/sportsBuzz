@@ -47,6 +47,7 @@ export default function WordSearchGame({ puzzle, onBack }) {
   const dragStart = useRef(null)
   const dragDir = useRef(null)
   const dragPath = useRef([])
+  const foundWordsRef = useRef(new Set())
 
   // Timer + momentum decay
   useEffect(() => {
@@ -62,13 +63,8 @@ export default function WordSearchGame({ puzzle, onBack }) {
       setMomentum((m) => Math.max(0, m - 0.05))
     }, 1000)
 
-    const onVisibility = () => {
-      if (document.hidden) clearInterval(interval)
-    }
-    document.addEventListener('visibilitychange', onVisibility)
     return () => {
       clearInterval(interval)
-      document.removeEventListener('visibilitychange', onVisibility)
     }
   }, [gameOver])
 
@@ -156,7 +152,7 @@ export default function WordSearchGame({ puzzle, onBack }) {
     setTotalAttempts((n) => n + 1)
 
     const matched = puzzle.words.find(
-      (w) => !foundWords.has(w) && (w === selected || w === reversed)
+      (w) => !foundWordsRef.current.has(w) && (w === selected || w === reversed)
     )
 
     if (matched) {
@@ -169,7 +165,11 @@ export default function WordSearchGame({ puzzle, onBack }) {
           return next
         })
       }
-      setFoundWords((prev) => new Set([...prev, matched]))
+      setFoundWords((prev) => {
+        const next = new Set([...prev, matched])
+        foundWordsRef.current = next
+        return next
+      })
       const multiplier = momentum >= 0.8 ? 1.5 : 1.0
       setScore((s) => s + matched.length * 100 * multiplier + timeLeft * 2)
       setMomentum((m) => Math.min(1, m + 0.3))
@@ -184,7 +184,23 @@ export default function WordSearchGame({ puzzle, onBack }) {
     dragDir.current = null
     dragPath.current = []
     setSelectionCells(new Set())
-  }, [gameOver, foundWords, momentum, timeLeft, puzzle]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [gameOver, momentum, timeLeft, puzzle]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const resetGame = useCallback(() => {
+    setTimeLeft(puzzle.timeSeconds)
+    setScore(0)
+    setMomentum(0)
+    setFoundWords(new Set())
+    setFoundCells(new Set())
+    setSelectionCells(new Set())
+    setMissedCells(new Set())
+    setTotalAttempts(0)
+    setGameOver(false)
+    dragStart.current = null
+    dragDir.current = null
+    dragPath.current = []
+    foundWordsRef.current = new Set()
+  }, [puzzle.timeSeconds])
 
   const momentumPct = Math.round(momentum * 100)
 
@@ -216,6 +232,7 @@ export default function WordSearchGame({ puzzle, onBack }) {
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchEnd}
       >
         <WordGrid
           grid={puzzle.grid}
@@ -257,7 +274,7 @@ export default function WordSearchGame({ puzzle, onBack }) {
             {foundWords.size} / {puzzle.words.length} words found
           </p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={resetGame}
             className="w-full bg-secondary text-background font-display font-bold py-3 rounded-xl mb-3"
           >
             Play Again
