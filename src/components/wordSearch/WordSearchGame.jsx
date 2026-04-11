@@ -205,7 +205,7 @@ export default function WordSearchGame({ puzzle, onBack }) {
   const momentumPct = Math.round(momentum * 100)
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="relative min-h-screen bg-background flex flex-col">
       {/* Header */}
       <div className="flex items-center gap-3 px-4 pt-12 pb-3">
         <button onClick={onBack} className="text-white p-1">
