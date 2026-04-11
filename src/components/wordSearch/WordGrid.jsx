@@ -67,7 +67,7 @@ export default function WordGrid({ grid, foundCells, selectionCells, missedCells
                   transition-colors duration-100
                   ${isFound ? 'bg-green-500/80 text-white' : ''}
                   ${isSelected && !isFound ? 'bg-secondary text-background' : ''}
-                  ${isMissed ? 'bg-red-500/60 text-white' : ''}
+                  ${isMissed && !isFound ? 'bg-red-500/60 text-white' : ''}
                   ${!isFound && !isSelected && !isMissed ? 'bg-surface-high text-white' : ''}
                 `}
               >
