@@ -99,7 +99,7 @@ export default function HangmanGame({ question, onBack, onNext }) {
                 onClick={onNext}
                 className="w-full py-3 rounded-xl bg-secondary text-background font-display font-bold text-sm uppercase tracking-wider"
               >
-                {isWon ? 'Next Question →' : 'Try Next →'}
+                Play Again →
               </button>
             </div>
           </div>
