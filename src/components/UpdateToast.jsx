@@ -5,6 +5,7 @@ const DISMISS_MS = 8000
 export default function UpdateToast({ updateServiceWorker, onDismiss }) {
   const [visible, setVisible] = useState(false)
   const timerRef = useRef(null)
+  const dismissTimerRef = useRef(null)
 
   useEffect(() => {
     // Trigger slide-in on next frame
@@ -12,12 +13,13 @@ export default function UpdateToast({ updateServiceWorker, onDismiss }) {
 
     timerRef.current = setTimeout(() => {
       setVisible(false)
-      setTimeout(onDismiss, 300) // wait for slide-out transition
+      dismissTimerRef.current = setTimeout(onDismiss, 300) // wait for slide-out transition
     }, DISMISS_MS)
 
     return () => {
       cancelAnimationFrame(raf)
       clearTimeout(timerRef.current)
+      clearTimeout(dismissTimerRef.current)
     }
   }, [onDismiss])
 
@@ -38,6 +40,7 @@ export default function UpdateToast({ updateServiceWorker, onDismiss }) {
         <div className="flex items-center justify-between px-4 py-3">
           <span className="text-sm text-on-surface-variant">New version available</span>
           <button
+            type="button"
             onClick={handleReload}
             className="text-sm font-semibold text-primary ml-4 shrink-0"
           >
@@ -53,12 +56,6 @@ export default function UpdateToast({ updateServiceWorker, onDismiss }) {
           />
         </div>
       </div>
-      <style>{`
-        @keyframes shrink {
-          from { transform: scaleX(1); }
-          to   { transform: scaleX(0); }
-        }
-      `}</style>
     </div>
   )
 }
