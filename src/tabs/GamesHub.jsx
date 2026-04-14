@@ -1,5 +1,5 @@
 // src/tabs/GamesHub.jsx
-import { Grid3X3, Search } from 'lucide-react'
+import { Grid3X3, Search, HelpCircle } from 'lucide-react'
 import GameCard from '../components/GameCard'
 
 const GAMES = [
@@ -16,6 +16,13 @@ const GAMES = [
     description: 'Find hidden sports terms in the grid.',
     badge: '4 puzzles',
     to: '/word-search',
+  },
+  {
+    icon: HelpCircle,
+    name: 'Hangman',
+    description: 'Guess the sports star or term before the figure is complete.',
+    badge: '12 questions',
+    to: '/hangman',
   },
 ]
 
