@@ -150,9 +150,9 @@ export default function HangmanGame({ question, onBack, onNext }) {
                     disabled={gameOver || guessed.has(letter)}
                     className={`w-9 h-9 rounded-md font-display font-bold text-sm transition-colors ${
                       isCorrect
-                        ? 'bg-secondary text-background'
+                        ? 'bg-green-500 text-white'
                         : isWrong
-                        ? 'bg-surface-highest text-on-surface-variant cursor-not-allowed'
+                        ? 'bg-red-500 text-white cursor-not-allowed'
                         : 'bg-surface-high text-white active:bg-surface-highest'
                     }`}
                   >
