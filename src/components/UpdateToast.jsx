@@ -25,7 +25,9 @@ export default function UpdateToast({ updateServiceWorker, onDismiss }) {
 
   function handleReload() {
     clearTimeout(timerRef.current)
+    clearTimeout(dismissTimerRef.current)
     updateServiceWorker(true)
+    onDismiss()
   }
 
   return (
