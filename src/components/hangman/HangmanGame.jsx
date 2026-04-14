@@ -69,14 +69,10 @@ export default function HangmanGame({ question, onBack, onNext }) {
             if (letter === ' ') {
               return <div key={i} className="w-4" />
             }
-            const revealed = isLost || guessed.has(letter)
+            const revealed = guessed.has(letter)
             return (
               <div key={i} className="flex flex-col items-center">
-                <span
-                  className={`font-display font-bold text-2xl tracking-widest min-w-[1.5rem] text-center ${
-                    isLost && !guessed.has(letter) ? 'text-primary' : 'text-white'
-                  }`}
-                >
+                <span className="font-display font-bold text-2xl tracking-widest min-w-[1.5rem] text-center text-white">
                   {revealed ? letter : '\u00A0'}
                 </span>
                 <div className="h-0.5 w-6 bg-on-surface-variant mt-1" />
@@ -85,15 +81,27 @@ export default function HangmanGame({ question, onBack, onNext }) {
           })}
         </div>
 
-        {/* Game over messages */}
-        {isWon && (
-          <div className="bg-secondary/15 rounded-xl px-4 py-3 text-center">
-            <p className="font-display font-bold text-secondary text-sm">Well played! 🎉</p>
-          </div>
-        )}
-        {isLost && (
-          <div className="bg-primary/10 rounded-xl px-4 py-3 text-center">
-            <p className="font-display font-bold text-primary text-sm">Better luck next time!</p>
+        {/* Game over modal */}
+        {gameOver && (
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-6">
+            <div className="bg-surface-high rounded-xl p-6 w-full max-w-sm flex flex-col items-center gap-4">
+              <p className="text-4xl">{isWon ? '🎉' : '😔'}</p>
+              <p className="font-display font-bold text-white text-xl text-center">
+                {isWon ? 'Well played!' : 'Better luck next time!'}
+              </p>
+              {isWon && (
+                <p className="font-display font-bold text-secondary text-2xl tracking-widest text-center">
+                  {question.answer}
+                </p>
+              )}
+              <button
+                type="button"
+                onClick={onNext}
+                className="w-full py-3 rounded-xl bg-secondary text-background font-display font-bold text-sm uppercase tracking-wider"
+              >
+                {isWon ? 'Next Question →' : 'Try Next →'}
+              </button>
+            </div>
           </div>
         )}
 
@@ -164,16 +172,6 @@ export default function HangmanGame({ question, onBack, onNext }) {
           ))}
         </div>
 
-        {/* Next / Try Next button */}
-        {gameOver && (
-          <button
-            type="button"
-            onClick={onNext}
-            className="w-full py-3 rounded-xl bg-secondary text-background font-display font-bold text-sm uppercase tracking-wider"
-          >
-            {isWon ? 'Next Question →' : 'Try Next →'}
-          </button>
-        )}
       </div>
     </div>
   )
