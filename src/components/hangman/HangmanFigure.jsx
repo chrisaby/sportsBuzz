@@ -1,7 +1,7 @@
 // src/components/hangman/HangmanFigure.jsx
 
 const STROKE = '#c3f400'        // secondary
-const FRAME_STROKE = '#3d4754'  // surface-highest
+const FRAME_STROKE = '#232a33'  // surface-highest
 
 export default function HangmanFigure({ wrongCount = 0 }) {
   return (

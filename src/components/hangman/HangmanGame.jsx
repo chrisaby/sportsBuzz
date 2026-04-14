@@ -27,9 +27,9 @@ export default function HangmanGame({ question, onBack, onNext }) {
   const gameOver = isWon || isLost
 
   const handleGuess = useCallback((letter) => {
-    if (gameOver) return
+    if (gameOver || guessed.has(letter)) return
     setGuessed(prev => new Set([...prev, letter]))
-  }, [gameOver])
+  }, [gameOver, guessed])
 
   const handleRevealHint = useCallback((hintIndex) => {
     // hintIndex is 1-based. Reveal if previous hint is already revealed.
