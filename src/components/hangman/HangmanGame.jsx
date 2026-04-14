@@ -27,9 +27,9 @@ export default function HangmanGame({ question, onBack, onNext }) {
   const gameOver = isWon || isLost
 
   const handleGuess = useCallback((letter) => {
-    if (gameOver || guessed.has(letter)) return
+    if (gameOver) return
     setGuessed(prev => new Set([...prev, letter]))
-  }, [gameOver, guessed])
+  }, [gameOver])
 
   const handleRevealHint = useCallback((hintIndex) => {
     // hintIndex is 1-based. Reveal if previous hint is already revealed.
@@ -42,7 +42,7 @@ export default function HangmanGame({ question, onBack, onNext }) {
     <div className="min-h-screen bg-background pb-28">
       {/* Header */}
       <div className="flex items-center gap-3 px-4 pt-4 pb-2">
-        <button type="button" onClick={onBack} className="p-1">
+        <button type="button" onClick={onBack} className="p-1" aria-label="Back to games">
           <ArrowLeft size={20} className="text-white" />
         </button>
         <div>
