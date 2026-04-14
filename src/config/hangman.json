@@ -1,0 +1,122 @@
+[
+  {
+    "id": "football-ronaldo",
+    "category": "Football",
+    "answer": "RONALDO",
+    "hints": [
+      "He has won the Ballon d'Or multiple times",
+      "He represents Portugal on the international stage",
+      "His nickname is CR7"
+    ]
+  },
+  {
+    "id": "cricket-tendulkar",
+    "category": "Cricket",
+    "answer": "TENDULKAR",
+    "hints": [
+      "Known as the God of Cricket",
+      "He scored 100 international centuries",
+      "He played for India and Mumbai Indians"
+    ]
+  },
+  {
+    "id": "basketball-jordan",
+    "category": "Basketball",
+    "answer": "JORDAN",
+    "hints": [
+      "He won six NBA championships with the Chicago Bulls",
+      "His Air brand became a global phenomenon",
+      "His jersey number was 23"
+    ]
+  },
+  {
+    "id": "tennis-federer",
+    "category": "Tennis",
+    "answer": "FEDERER",
+    "hints": [
+      "He won 20 Grand Slam titles",
+      "He is Swiss and known for his elegant playing style",
+      "He retired in 2022 after the Laver Cup"
+    ]
+  },
+  {
+    "id": "athletics-bolt",
+    "category": "Athletics",
+    "answer": "BOLT",
+    "hints": [
+      "He holds the 100m and 200m world records",
+      "He is from Jamaica and nicknamed Lightning",
+      "He won three consecutive Olympic 100m golds"
+    ]
+  },
+  {
+    "id": "football-messi",
+    "category": "Football",
+    "answer": "MESSI",
+    "hints": [
+      "He plays for Inter Miami and previously Barcelona",
+      "He led Argentina to the 2022 World Cup title",
+      "He has won the most Ballon d'Or awards in history"
+    ]
+  },
+  {
+    "id": "cricket-kohli",
+    "category": "Cricket",
+    "answer": "KOHLI",
+    "hints": [
+      "He is India's most successful Test run-scorer after Tendulkar",
+      "He captained India across all formats",
+      "He plays for Royal Challengers Bengaluru in the IPL"
+    ]
+  },
+  {
+    "id": "basketball-lebron",
+    "category": "Basketball",
+    "answer": "LEBRON",
+    "hints": [
+      "He is nicknamed The King",
+      "He won championships with three different teams",
+      "He became the NBA's all-time leading scorer in 2023"
+    ]
+  },
+  {
+    "id": "football-penalty",
+    "category": "Football",
+    "answer": "PENALTY",
+    "hints": [
+      "It is a spot kick awarded for a foul inside the box",
+      "It is taken from 12 yards in front of goal",
+      "A shootout of these decides many knockout matches"
+    ]
+  },
+  {
+    "id": "cricket-century",
+    "category": "Cricket",
+    "answer": "CENTURY",
+    "hints": [
+      "A batsman achieves this by scoring 100 runs in an innings",
+      "Sachin Tendulkar scored 100 of these internationally",
+      "It is celebrated with a raised bat by the batter"
+    ]
+  },
+  {
+    "id": "tennis-wimbledon",
+    "category": "Tennis",
+    "answer": "WIMBLEDON",
+    "hints": [
+      "It is the oldest Grand Slam tournament in the world",
+      "It is played on grass courts in London",
+      "Players must wear predominantly white clothing"
+    ]
+  },
+  {
+    "id": "football-offside",
+    "category": "Football",
+    "answer": "OFFSIDE",
+    "hints": [
+      "A player is caught in this position when behind the last defender at the moment the ball is played",
+      "VAR is frequently used to check for this",
+      "It results in a free kick for the defending team"
+    ]
+  }
+]
